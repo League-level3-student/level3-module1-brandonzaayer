@@ -51,7 +51,6 @@ int[] ints;
 		int[] nums2 = new int[ints.length+1];
 		//B. Make a for loop that iterates through the new array
 		for(int i = 0; i < nums2.length; i++) {
-		
 			//C. if i is less than location:
 		    //		set the element at i of the new array to the element at i of the member array
 			if(i < location) {
@@ -59,7 +58,7 @@ int[] ints;
 			}
 			//D. else if i is greater than location:
 		    //		set the element at i of the new array to the i - 1 element of the member array
-			if(i > location) {
+			else if(i > location) {
 				nums2[i] = ints[i-1];
 			}
 			//E. else, set the element at i of the new array to the value v
@@ -76,30 +75,38 @@ int[] ints;
 	//9. Complete the steps in the remove method
 	public void remove(int location) {
 		//A. create a new array that is one element smaller than the member array
-		
+		int[] small = new int[ints.length-1];
 		//B. make a for loop to iterate through the member array
-		
+		for(int i = 0; i < ints.length; i++) {
 			//C. if i  is less than location
 			//		set the element at i of the new array to the element at i of the member array
-			
+			if(i < location) {
+				small[i] = ints[i];
+			}
 			//D. else if i  is greater than location
 			//		set the element at i - 1 of the new array to the element at i of the member array
-			
+			else if(i > location) {
+				small[i - 1] = ints[i];
+			}
 			//E. else, continue;
-			
+			else {
+				continue;
+			}
+		}	
 		//F. set the member array equal to the new array
+		ints = small;
 	}
-	
 	//10. Run the tests again the see if you are correct so far
 	
 	//11. Complete the size method so that it returns the length of the member array.
 	public int size() {
-		return 0;
+		return ints.length;
 	}
 	
 	//12. Complete the clear array so that it sets the member array 
 	//    equal to a new integer array of size 0
 	public void clear() {
+		ints = new int[0];
 	}
 	
 	//13. Run the test again to see if you are finished.
