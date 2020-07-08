@@ -7,7 +7,6 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -15,6 +14,18 @@ import javax.swing.JPanel;
 
 public class _06_IPodShuffle implements MouseListener{
 	ArrayList<Song> theMusic = new ArrayList<Song>();
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JButton button1 = new JButton();
+	JButton button2 = new JButton();
+	JButton button3 = new JButton();
+	JButton button4 = new JButton();
+	JButton button5 = new JButton();
+	Song one = new Song("demo.mp3");
+	Song two = new Song("jazz.mp3");
+	Song three = new Song("country.mp3");
+	Song four = new Song("hip-hop.mp3");
+	boolean isPlaying;
 	public _06_IPodShuffle() {
 		// 1. Use the Song class the play the demo.mp3 file.
 		//Song s = new Song("demo.mp3");
@@ -27,16 +38,24 @@ public class _06_IPodShuffle implements MouseListener{
 		 * you're really cool, you can stop all the songs, before playing a new one on
 		 * subsequent button clicks.
 		 */
-		
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		JButton button = new JButton();
 		frame.add(panel);
-		panel.add(button);
+		panel.add(button1);
+		panel.add(button2);
+		panel.add(button3);
+		panel.add(button4);
+		panel.add(button5);
 		frame.setVisible(true);
+		button1.setText("Demo song");
+		button1.addMouseListener(this);
+		button2.setText("Jazz song");
+		button2.addMouseListener(this);
+		button3.setText("Country song");
+		button3.addMouseListener(this);
+		button4.setText("Hip-hop song");
+		button4.addMouseListener(this);
+		button5.setText("Random song");
+		button5.addMouseListener(this);
 		frame.pack();
-		button.setText("Surprise me!");
-		button.addMouseListener(this);
 	}
 	
 	public static void main(String[] args) {
@@ -47,10 +66,6 @@ public class _06_IPodShuffle implements MouseListener{
 	}
 	
 	private void initializeMusic() {
-		Song one = new Song("demo.mp3");
-		Song two = new Song("demo.mp3");
-		Song three = new Song("demo.mp3");
-		Song four = new Song("demo.mp3");
 		theMusic.add(one);
 		theMusic.add(two);
 		theMusic.add(three);
@@ -60,7 +75,66 @@ public class _06_IPodShuffle implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(arg0.getSource().equals(button1)) {
+			two.stop();
+			three.stop();
+			four.stop();
+			
+			one.play();
+		}
+		if(arg0.getSource().equals(button2)) {
+			one.stop();
+			three.stop();
+			four.stop();
+			
+			two.play();
+		}
+		if(arg0.getSource().equals(button3)) {
+			one.stop();
+			two.stop();
+			four.stop();
+			
+			three.play();
+		}
+		if(arg0.getSource().equals(button4)) {
+			one.stop();
+			two.stop();
+			three.stop();
+			
+			four.play();
+		}
+		if(arg0.getSource().equals(button5)) {
+			Random r = new Random();
+			int rand = r.nextInt(4);
+			if(rand == 0) {
+				two.stop();
+				three.stop();
+				four.stop();
+				
+				one.play();
+			}
+			if(rand == 1) {
+				one.stop();
+				three.stop();
+				four.stop();
+				
+				two.play();
+			}
+			if(rand == 2) {
+				one.stop();
+				two.stop();
+				four.stop();
+				
+				three.play();
+			}
+			if(rand == 3) {
+				one.stop();
+				two.stop();
+				three.stop();
+				
+				four.play();
+			}
+		}
 	}
 
 	@Override
@@ -78,7 +152,7 @@ public class _06_IPodShuffle implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -86,4 +160,6 @@ public class _06_IPodShuffle implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 }
