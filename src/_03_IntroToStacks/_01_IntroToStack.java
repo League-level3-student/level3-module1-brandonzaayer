@@ -26,7 +26,7 @@ public class _01_IntroToStack {
 		if(uno > dos) {
 			System.out.println("Popping elements off stack elements between " + dos + " and " + uno + ":");
 			for(int i = 0; i < d.size(); i++) {
-				Double temp1 = d.pop();;
+				Double temp1 = d.pop();
 				if(temp1 > dos && temp1 < uno) {
 					System.out.println(temp1);
 				}
