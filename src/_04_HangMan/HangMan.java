@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.hamcrest.core.SubstringMatcher;
+
 public class HangMan implements KeyListener{
 	JFrame frame;
 	JPanel panel;
@@ -23,7 +25,9 @@ public class HangMan implements KeyListener{
 	final static int HEIGHT = 500;
 	Stack<String> words = new Stack<String>();
 	int lives = 6;
+	String guesses = "None";
 	GridBagConstraints c = new GridBagConstraints();
+	String currentWord;
 public static void main(String[] args) {
 	HangMan game = new HangMan();
 	game.setup();
@@ -59,7 +63,7 @@ void setup(){
 	c.gridy = 0;       //first row
 	panel.add(showLives, c);
 	
-	showLetters = new JLabel("Letters guesses: ");
+	showLetters = new JLabel("Letters guessed: " + guesses);
 	c.fill = GridBagConstraints.HORIZONTAL;
 	c.ipady = 0;       //reset to default
 	c.weighty = 1.0;   //request any extra vertical space
@@ -71,11 +75,11 @@ void setup(){
 	panel.add(showLetters, c);
 }
 void play() {
-	String currentWord = words.push(words.lastElement());
+	currentWord = words.push(words.lastElement());
 	Font wordFont = new Font("Arial", Font.PLAIN, 28);
-	for(int i = 0; i <= currentWord.length(); i++) {
+	for(int i = 0; i <= currentWord.length()-1; i++) {
 		label.setFont(wordFont);
-		label.setText(label.getText() + "_ ");
+		label.setText(label.getText() + "_");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipady = 40;      //make this component tall
 		c.weightx = 0.0;
@@ -86,18 +90,33 @@ void play() {
 	frame.addKeyListener(this);
 }
 @Override
-public void keyPressed(KeyEvent arg0) {
+public void keyPressed(KeyEvent e) {
 	// TODO Auto-generated method stub
-	//if(e.getKeyCode() == ) {
-		
+	for(int i = 0; i <= currentWord.length()-1; i++) {
+		if(e.getKeyChar() == currentWord.charAt(i)) {
+			if(i == 0) {
+				label.setText(e.getKeyChar() + label.getText().substring(1));
+			}
+			else if (i == currentWord.length()-1) {
+				label.setText(label.getText().substring(0, i) + e.getKeyChar());
+			}
+			else {
+				label.setText(label.getText().substring(0, i) + e.getKeyChar() + label.getText().substring(i+1));
+			}
+		}
+		else {
+			lives = lives - 1;
+			showLives.setText("Lives: " + lives);
+		}
 	}
+}
 @Override
-public void keyReleased(KeyEvent e) {
+public void keyReleased(KeyEvent arg0) {
 	// TODO Auto-generated method stub
 	
 }
 @Override
-public void keyTyped(KeyEvent e) {
+public void keyTyped(KeyEvent arg0) {
 	// TODO Auto-generated method stub
 	
 }
