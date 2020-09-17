@@ -18,7 +18,7 @@ public class _01_IntroToHashMaps {
 		// their respective
 		// square roots (values). Use the following format.
 		for (int i = 0; i <= 500; i++) {
-			System.out.println("The square roof of "+i+" is "+ hash.get(i));
+			System.out.println("The square roof of " + i + " is " + hash.get(i));
 		}
 
 		// The square Root of 0 is 0.0
